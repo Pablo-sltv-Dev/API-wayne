@@ -1,0 +1,48 @@
+.env/
+.venv/
+# --- Python Bytecode & Cache ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Environments ---
+.venv/
+venv/
+env/
+ENV/
+bin/
+lib/
+develop-eggs/
+dist/
+build/
+*.egg-info/
+
+# --- Flask Specifics ---
+instance/
+.webassets-cache
+
+# --- Environment Variables & Secrets ---
+.env
+.flaskenv
+*.secret
+secrets.toml
+
+# --- Database Files (If using SQLite) ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- IDEs and Editors ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+
