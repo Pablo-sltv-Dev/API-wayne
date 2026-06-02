@@ -2,10 +2,27 @@ import mysql.connector
 from mysql.connector import Error
 from dotenv import load_dotenv, dotenv_values
 import os
+import bcrypt
+import jwt
+from datetime import datetime, timedelta
 
-teste = str
+
+def generate_hash(senha):
+    
+        return bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()) 
+
+def snh_hash(senha):
+        return senha.decode()
+    
+
+
+
 
 class Cnx:
+
+
+    
+
     def __init__(self):
         
         load_dotenv()
@@ -55,12 +72,42 @@ class CrS(Cnx):
             print("\n", error)
 
 
-# try:
-#     teste = CrS()
-#     dados = teste.Vizualizar_table()
+    
 
-#     for dado in dados:
-#         print("\n", dado,"\n")
 
-# except TypeError as erro:
-#     print("\nerro:", TypeError, "\nTipo: ", erro)
+class Cmds(CrS):
+    def __init__(self):
+        super().__init__()
+    
+    def verification(self, dados):
+
+        self.cursor.execute('SELECT ID_cntt,SNH_cntt FROM CNTS WHERE EMAIL_cntt = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
+
+        resultado = self.cursor.fetchone() # Aqui retorna a senha
+        swww = resultado['SNH_cntt'] # transforma obj em str
+        # print("\nteste:",swww,"\n")
+
+
+        
+
+        # print(bool(consulta))
+
+        if bcrypt.checkpw(dados['snh'].encode('utf-8'),swww.encode('utf-8')): # faz a comparação
+            k = jwt.encode(
+                {
+                    "id":resultado['ID_cntt'],
+                    "email": dados['email'],
+                    "exp": datetime.now() + timedelta(hours=2)
+
+                },
+                os.getenv("SECRET_KEY"),
+                algorithm="HS256"
+            )
+            
+            return k
+        else:
+            return False
+        
+# teste = Cmds()
+
+# print(teste.verification("teste@gmail.com", {"senha":"senha1234"}))

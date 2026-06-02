@@ -8,8 +8,7 @@ class Verificao:
         load_dotenv()
         try:
             self.Tipo = os.getenv("FLASK_DEV_ENV")
-            # self.Debug = os.getenv("FLASK_DEV_DEBUG")
-            # self.port = os.getenv("FLASK_DEV_PORT") 
+            
             if self.Tipo == 'development':
                 self.dados = {
                     "TIPO" : os.getenv("FLASK_DEV_ENV"),
@@ -30,6 +29,8 @@ class Verificao:
             
     def dados_(self):
         return self.dados
+
+
 
 
 
