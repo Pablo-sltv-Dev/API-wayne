@@ -2,6 +2,9 @@
 
 ## Resumo: Fiz a verificação de informações, mas os tokens por link ainda nao foram feitos
 
+vai acessar a rota **login** e se as informações estiverem corretas, então ele receberá um token, temporário, que vai durar 2 horas.
+Se tive o token do login, então poderá acessar a rota **home**
+
 ---
 ## Objetivos:
 

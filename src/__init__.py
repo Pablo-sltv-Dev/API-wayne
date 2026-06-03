@@ -1,10 +1,13 @@
 from flask import Flask
+
 from flask_cors import CORS
 from .utils import * #verificao de tipo de usuario e tipo de porta
 from dotenv import load_dotenv, dotenv_values
 import os
 
 load_dotenv()
+
+
 
 app = Flask(__name__)
 SECRET_KEY=os.getenv("SECRET_KEY")

@@ -40,7 +40,7 @@ def verification():
 def connection_test():
     return jsonify({"menssage": "hello world"})
 
-@app.route('/rta/log_test', methods=['POST'])
+@app.route('/rta/login', methods=['POST'])
 def verificacao_info():
     try:
         data = extracion(request.get_json())
@@ -64,9 +64,9 @@ def verificacao_info():
         return {"menssage": "algo deu errado", "Error": erro}
     
 
-@app.route("/rta/teste_tk")
+@app.route("/rta/home") # essa rota só poder ser acessa se tiver o token
 @token_required
-def teste():
+def home():
     return jsonify({"message":"Acesso com o token feito com sucesso"})
 
 
