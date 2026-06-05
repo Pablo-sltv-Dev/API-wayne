@@ -2,14 +2,11 @@ import mysql.connector
 from mysql.connector import Error
 from dotenv import load_dotenv, dotenv_values
 import os
-import bcrypt
-import jwt
-from datetime import datetime, timedelta
+from .md_db import comparador, generate_token, vrfcr_token
 
 
-def generate_hash(senha):
-    
-        return bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt()) 
+
+
 
 def snh_hash(senha):
         return senha.decode()
@@ -77,37 +74,32 @@ class CrS(Cnx):
 
 class Cmds(CrS):
     def __init__(self):
+        print("\nclass db acessado\n")
         super().__init__()
     
     def verification(self, dados):
+        print("\nmetodo veri acessado\n")
+        try:
 
-        self.cursor.execute('SELECT ID_cntt,SNH_cntt FROM CNTS WHERE EMAIL_cntt = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
-
-        resultado = self.cursor.fetchone() # Aqui retorna a senha
-        swww = resultado['SNH_cntt'] # transforma obj em str
-        # print("\nteste:",swww,"\n")
+            self.cursor.execute('SELECT ID_cntt,SNH_cntt FROM CNTS WHERE EMAIL_cntt = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
 
 
-        
-
-        # print(bool(consulta))
-
-        if bcrypt.checkpw(dados['snh'].encode('utf-8'),swww.encode('utf-8')): # faz a comparação
-            k = jwt.encode(
-                {
-                    "id":resultado['ID_cntt'],
-                    "email": dados['email'],
-                    "exp": datetime.now() + timedelta(hours=2)
-
-                },
-                os.getenv("SECRET_KEY"),
-                algorithm="HS256"
-            )
+            resultado = self.cursor.fetchone() # Aqui retorna o resultado da query
+            if resultado:
+                sn_str = resultado['SNH_cntt'] # obj -> str
+                if comparador(dados['snh'], sn_str):
+                    print("\nSenha Aprovada\n")
+                    ml = dados['email']
+                    gerador = generate_token(ml, resultado['ID_cntt'])
+                    return gerador
+                else:
+                    return False
+            else:
+                return False
             
-            return k
-        else:
-            return False
-        
-# teste = Cmds()
+        except Exception as erro:
+            print(f"\nErro: {erro}\n")
 
-# print(teste.verification("teste@gmail.com", {"senha":"senha1234"}))
+    
+
+

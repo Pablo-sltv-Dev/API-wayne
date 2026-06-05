@@ -1,9 +1,23 @@
 # API-wayne
 
-## Resumo: Fiz a verificação de informações, mas os tokens por link ainda nao foram feitos
+---
+## Resumo: 
+A criação de tokenn está ok, mas a verificação do token já criado não está dando certo
 
-vai acessar a rota **login** e se as informações estiverem corretas, então ele receberá um token, temporário, que vai durar 2 horas.
-Se tive o token do login, então poderá acessar a rota **home**
+verificação:
+1. Rota '/rta/teste' | method - GET | -> **OK**
+2. Rota '/rta/login' | method - POST |->
+    A rota login deve conter as informações "email" e "senha" do usuario que quer conectar. Se as informações estiverem certas, então a rota irá retornar um token.
+    informações usadas
+    | informação | valor |
+    |-----| ----|
+    | Email | teste@gmail.com|
+    | senha | senha1234 |
+    | token | ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJleHAiOjE3ODA2NTkxODl9.0_AMCvAIcT46P94d-M8WuQ32YA-X7bD9gjcT4fIJd0w '|
+
+    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJleHAiOjE3ODA2NTk1MjN9.OaOP4sgNPh7TFcVi4styA33QvMUX-VrCbdMXPcKegmM
+
+
 
 ---
 ## Objetivos:
