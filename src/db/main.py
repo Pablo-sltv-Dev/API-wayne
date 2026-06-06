@@ -3,7 +3,7 @@ from mysql.connector import Error
 from dotenv import load_dotenv, dotenv_values
 import os
 from .md_db import comparador, generate_token, vrfcr_token
-
+from src import Alert_Error, Alert_Success
 
 
 
@@ -16,10 +16,6 @@ def snh_hash(senha):
 
 
 class Cnx:
-
-
-    
-
     def __init__(self):
         
         load_dotenv()
@@ -33,9 +29,10 @@ class Cnx:
 
             self.conexao = mysql.connector.connect(**config)
            
+            Alert_Success("Cnx validado")
             return 
         except Error as e:
-            print("\nErro ao conectar ao MySQL COnnector: ", e)
+            Alert_Error("Erro ao conectar ao MySQL COnnector")
             return None
     
     def teste(self):
@@ -43,6 +40,8 @@ class Cnx:
             print("\n__CONECTADO AO BANCO DE DADOS__\n")
             self.conexao.close()
             return True
+        else:
+            return False
 
 
 class CrS(Cnx):
@@ -52,7 +51,7 @@ class CrS(Cnx):
             self.cursor = self.conexao.cursor(dictionary=True)
             return 
         except Error as erro:
-            print("\nTipo:", erro)
+            Alert_Error("Erro ao conectar ao MySQL COnnector")
 
 
     def Vizualizar_table(self):
@@ -74,11 +73,9 @@ class CrS(Cnx):
 
 class Cmds(CrS):
     def __init__(self):
-        print("\nclass db acessado\n")
         super().__init__()
     
     def verification(self, dados):
-        print("\nmetodo veri acessado\n")
         try:
 
             self.cursor.execute('SELECT ID_cntt,SNH_cntt FROM CNTS WHERE EMAIL_cntt = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
@@ -88,7 +85,6 @@ class Cmds(CrS):
             if resultado:
                 sn_str = resultado['SNH_cntt'] # obj -> str
                 if comparador(dados['snh'], sn_str):
-                    print("\nSenha Aprovada\n")
                     ml = dados['email']
                     gerador = generate_token(ml, resultado['ID_cntt'])
                     return gerador
@@ -98,7 +94,8 @@ class Cmds(CrS):
                 return False
             
         except Exception as erro:
-            print(f"\nErro: {erro}\n")
+            Alert_Error("Erro ao conectar ao MySQL COnnector")
+
 
     
 

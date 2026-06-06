@@ -1,6 +1,11 @@
 # API-wayne
 
 ---
+# links do postmans
+ "https://solotv-3391511.postman.co/workspace/Final-Project-Infinity~9360ac56-9360-4842-b265-15c6250018a6/request/47017727-31766f6b-7b18-4299-863f-2130fa482d06?action=share&creator=47017727", 
+ "https://solotv-3391511.postman.co/workspace/Final-Project-Infinity~9360ac56-9360-4842-b265-15c6250018a6/request/47017727-ccd91219-97ca-4fbb-8933-6b521be7358b?action=share&creator=47017727",
+
+
 ## Resumo: 
 A verificação de senha e criação de hash está ok
 a verificação de hash e criação de tokens está ok

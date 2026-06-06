@@ -1,10 +1,10 @@
-from src import app, passe
-
+from src import app, passe, Alert_Debug
 try:
 
     if __name__ == '__main__':
         # app.run(debug=True)
         if passe:
+            Alert_Debug("Server Online")
             app.run(
                 host='0.0.0.0',
                 port=passe['PORT'],
