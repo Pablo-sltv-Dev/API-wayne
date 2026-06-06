@@ -1,6 +1,6 @@
 try:
     from flask import jsonify, request, redirect, url_for
-    from src import app, SECRET_KEY, logger
+    from src import app, SECRET_KEY, logger, limiter
     from functools import wraps
     from .utils import extracion
     from .models import User
@@ -84,6 +84,7 @@ def token_required(f):
 
    
 @app.route('/rta/teste')
+@limiter.limit('5 per minute')
 def connection_test():
     return jsonify({"menssage": "hello world"})
 
