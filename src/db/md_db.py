@@ -64,4 +64,3 @@ def comparador(sn_dgtd, sn_bd ):
         return True
     else:
         return False
-

@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 from dotenv import load_dotenv, dotenv_values
 import os
-from .md_db import comparador, generate_token, vrfcr_token
+from .md_db import comparador, generate_token, vrfcr_token, generate_hash
 from src import Alert_Error, Alert_Success
 
 
@@ -49,9 +49,10 @@ class CrS(Cnx):
         super().__init__()
         try:
             self.cursor = self.conexao.cursor(dictionary=True)
+            Alert_Success("CRS validade")
             return 
         except Error as erro:
-            Alert_Error("Erro ao conectar ao MySQL COnnector")
+            Alert_Error("Erro ao conectar ao MySQL crs")
 
 
     def Vizualizar_table(self):
@@ -78,15 +79,17 @@ class Cmds(CrS):
     def verification(self, dados):
         try:
 
-            self.cursor.execute('SELECT ID_cntt,SNH_cntt FROM CNTS WHERE EMAIL_cntt = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
+            self.cursor.execute('SELECT id_eps, senha_hash FROM EMPLOYEES WHERE email = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
 
 
             resultado = self.cursor.fetchone() # Aqui retorna o resultado da query
             if resultado:
-                sn_str = resultado['SNH_cntt'] # obj -> str
+                sn_str = resultado['senha_hash'] # obj -> str
                 if comparador(dados['snh'], sn_str):
+                    Alert_Success("resposta")
                     ml = dados['email']
-                    gerador = generate_token(ml, resultado['ID_cntt'])
+                    gerador = generate_token(ml, resultado['id_eps'])
+                    
                     return gerador
                 else:
                     return False
@@ -94,9 +97,8 @@ class Cmds(CrS):
                 return False
             
         except Exception as erro:
-            Alert_Error("Erro ao conectar ao MySQL COnnector")
+            Alert_Error(f"Erro: {erro}")
 
 
-    
 
 
