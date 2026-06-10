@@ -7,11 +7,10 @@ class User:
     def __init__(self, dados):
         self.user = {
             "email": dados["email"],
-            "snh": dados["senha"],
-            "tkn": None
+            "snh": dados["senha"]
         }
-        self.email = dados["email"],
-        self.snh = dados["senha"],
+        self.email = dados["email"]
+        self.snh = dados["senha"]
         self.tkn = None
         
         
@@ -20,8 +19,7 @@ class User:
             Rb = Cmds()
             resultado = Rb.verification(self.user)
             if resultado:
-                self.tkn = resultado
-                return self.tkn
+                return resultado
             else:
                 return False
 

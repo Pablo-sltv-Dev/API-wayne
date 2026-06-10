@@ -79,7 +79,7 @@ class Cmds(CrS):
     def verification(self, dados):
         try:
 
-            self.cursor.execute('SELECT id_eps, senha_hash FROM EMPLOYEES WHERE email = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
+            self.cursor.execute('SELECT id_eps, name_eps, senha_hash FROM EMPLOYEES WHERE email = %s', (dados['email'],)) # verifica se o email registrado é o mesmo email enviado
 
 
             resultado = self.cursor.fetchone() # Aqui retorna o resultado da query
@@ -89,8 +89,12 @@ class Cmds(CrS):
                     Alert_Success("resposta")
                     ml = dados['email']
                     gerador = generate_token(ml, resultado['id_eps'])
-                    
-                    return gerador
+                    response = {
+                        "name": resultado['name_eps'],
+                        "email": dados['email'],
+                        "tk": gerador
+                    }
+                    return response
                 else:
                     return False
             else:
