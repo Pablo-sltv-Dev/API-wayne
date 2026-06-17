@@ -3,4 +3,10 @@ from flask import jsonify
 @app.route('/rta/teste')
 @limiter.limit('5 per minute')
 def connection_test():
-    return jsonify({"menssage": True})
+    return jsonify(
+        {
+            "sucess": True,
+            "message": "API foi conectada",
+            "data": None
+        }
+    ), 200

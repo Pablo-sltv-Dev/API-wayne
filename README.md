@@ -39,9 +39,13 @@ O limite de requisição está ok
 ---
 ## Rotas
 Pra cada rota que for acessa ela terá uma intervenção do decorador `@app.before_request`
-|Rota|Função|
-|---|---|
-|
+| Rota | Função |
+| --- | --- |
+| `/rta/test` | teste de conexão |
+| `/rts/teste_info` | teste de recebimento de informação | 
+| `/rta/login` | verificação de informações e criação de token | 
+| `/rta/tk_verificacao` | verificação de token |
+|  |  | 
 
 ---
 
@@ -50,6 +54,28 @@ Pra cada rota que for acessa ela terá uma intervenção do decorador `@app.befo
 ## Mapa atual
 
 ```Bash
+.
+│
+│
+│
+├── src/
+    │   
+    ├── __init__.py
+    │
+    ├── routes/
+            │
+            ├── __init__.py
+            │
+            ├── public.py
+            │
+            ├── private.py
+
+│
+├── DB/
+
+
+
+
 .
 ├── docu.md
 ├── README.md

@@ -22,13 +22,17 @@ try:
     def request_info():
         
         data = extracion(request.get_json()) # extrai as informações
+        print(f'''
+            Email -> {data['email']}
+            senha -> {data['senha']}
+    ''')
         if not data:
             return jsonify({"message": "dados inexistentes"})
         else:
-            pass
+            return jsonify({"message":data}),200
 
 
-        return jsonify({"message":data})
+        
 
 
     @app.route('/rta/login', methods=['POST'])
