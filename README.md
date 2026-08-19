@@ -1,6 +1,19 @@
 # API-wayne
 
 ---
+## ROTAS
+
+Pra cada rota que for acessa ela terá uma intervenção do decorador `@app.before_request`
+| Rota | Função |
+| --- | --- |
+| `/rta/test` | teste de conexão |
+| `/rts/teste_info` | teste de recebimento de informação | 
+| `/rta/login` | verificação de informações e criação de token | 
+| `/rta/tk_verificacao` | verificação de token |
+|  |  | 
+
+
+---
 # links do postmans
  "https://solotv-3391511.postman.co/workspace/Final-Project-Infinity~9360ac56-9360-4842-b265-15c6250018a6/request/47017727-31766f6b-7b18-4299-863f-2130fa482d06?action=share&creator=47017727", 
  "https://solotv-3391511.postman.co/workspace/Final-Project-Infinity~9360ac56-9360-4842-b265-15c6250018a6/request/47017727-ccd91219-97ca-4fbb-8933-6b521be7358b?action=share&creator=47017727",
@@ -73,9 +86,6 @@ Pra cada rota que for acessa ela terá uma intervenção do decorador `@app.befo
 │
 ├── DB/
 
-
-
-
 .
 ├── docu.md
 ├── README.md
@@ -98,4 +108,5 @@ Pra cada rota que for acessa ela terá uma intervenção do decorador `@app.befo
 
 
 ---
-## Feito por Pablo
+## Feito por 
+Pablo
